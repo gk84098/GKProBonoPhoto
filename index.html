@@ -8,306 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#1C2B22;
-    --plum:#2B2140;
-    --gold:#C98A3B;
-    --paper:#F7F3E8;
-    --sage:#7C9885;
-    --charcoal:#26302B;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--charcoal);
-    font-family:'Work Sans', sans-serif;
-    line-height:1.5;
-  }
-  h1,h2,h3{
-    font-family:'Fraunces', serif;
-    margin:0;
-    font-weight:600;
-    color:var(--ink);
-  }
-  a{color:inherit;}
-  img{max-width:100%; display:block;}
-  .wrap{
-    max-width:1160px;
-    margin:0 auto;
-    padding:0 32px;
-  }
-
-  /* Focus visibility */
-  a:focus-visible, button:focus-visible{
-    outline:2px solid var(--gold);
-    outline-offset:3px;
-  }
-
-  /* Nav */
-  header{
-    position:sticky; top:0; z-index:40;
-    background:rgba(247,243,232,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid rgba(28,43,34,0.1);
-  }
-  nav{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 32px;
-    max-width:1160px; margin:0 auto;
-  }
-  .brand{
-    font-family:'Fraunces', serif;
-    font-size:20px;
-    font-weight:600;
-    color:var(--ink);
-    text-decoration:none;
-  }
-  .nav-links{
-    display:flex; gap:28px;
-    list-style:none; margin:0; padding:0;
-  }
-  .nav-links a{
-    text-decoration:none;
-    font-size:15px;
-    color:var(--charcoal);
-    padding:4px 2px;
-    border-bottom:1px solid transparent;
-    transition:border-color .2s ease;
-  }
-  .nav-links a:hover{border-color:var(--gold);}
-
-  /* Hero */
-  .hero{
-    display:grid;
-    grid-template-columns:1.1fr 1fr;
-    align-items:stretch;
-    min-height:560px;
-  }
-  .hero-photo{
-    position:relative;
-    overflow:hidden;
-    background:var(--ink);
-  }
-  .hero-photo img{
-    width:100%; height:100%;
-    object-fit:cover;
-    filter:grayscale(35%) sepia(12%) saturate(140%) hue-rotate(-8deg) brightness(0.85);
-  }
-  .hero-photo::after{
-    content:"";
-    position:absolute; inset:0;
-    background:linear-gradient(160deg, rgba(43,33,64,0.25), rgba(28,43,34,0.45));
-    mix-blend-mode:multiply;
-  }
-  .hero-text{
-    display:flex; flex-direction:column; justify-content:center;
-    padding:64px 56px;
-  }
-  .hero-text h1{
-    font-size:clamp(34px, 4.2vw, 52px);
-    line-height:1.08;
-    max-width:11ch;
-  }
-  .hero-text p{
-    margin:22px 0 0;
-    font-size:18px;
-    color:var(--charcoal);
-    max-width:38ch;
-  }
-  .cta{
-    display:inline-block;
-    margin-top:30px;
-    align-self:flex-start;
-    background:var(--ink);
-    color:var(--paper);
-    text-decoration:none;
-    padding:14px 26px;
-    border-radius:2px;
-    font-size:15px;
-    font-weight:500;
-    transition:background .2s ease;
-  }
-  .cta:hover{background:var(--plum);}
-
-  /* Section spacing */
-  section{padding:88px 0;}
-  .section-head{
-    max-width:56ch;
-    margin-bottom:40px;
-  }
-  .section-head h2{
-    font-size:30px;
-  }
-  .section-head p{
-    margin:14px 0 0;
-    color:var(--charcoal);
-    font-size:16px;
-  }
-
-  /* Filters */
-  .filters{
-    display:flex; gap:24px; flex-wrap:wrap;
-    margin-bottom:36px;
-    border-bottom:1px solid rgba(28,43,34,0.12);
-    padding-bottom:16px;
-  }
-  .filters button{
-    background:none; border:none; cursor:pointer;
-    font-family:'Work Sans', sans-serif;
-    font-size:15px;
-    color:var(--charcoal);
-    padding:4px 0;
-    border-bottom:2px solid transparent;
-  }
-  .filters button.active{
-    color:var(--ink);
-    border-bottom-color:var(--gold);
-    font-weight:600;
-  }
-
-  /* Masonry gallery */
-  .gallery{
-    column-count:3;
-    column-gap:18px;
-  }
-  .gallery figure{
-    margin:0 0 18px;
-    break-inside:avoid;
-    position:relative;
-    overflow:hidden;
-    cursor:pointer;
-    background:var(--ink);
-  }
-  .gallery img{
-    width:100%; display:block;
-    transition:transform .5s ease;
-  }
-  .gallery figure:hover img{transform:scale(1.04);}
-  .gallery figcaption{
-    position:absolute; left:0; right:0; bottom:0;
-    padding:14px 16px;
-    font-size:14px;
-    color:var(--paper);
-    background:linear-gradient(to top, rgba(28,43,34,0.85), rgba(28,43,34,0));
-    opacity:0;
-    transition:opacity .3s ease;
-  }
-  .gallery figure:hover figcaption{opacity:1;}
-  .gallery figure.hidden{display:none;}
-
-  /* About */
-  .about{
-    display:grid;
-    grid-template-columns:0.85fr 1.15fr;
-    gap:56px;
-    align-items:center;
-  }
-  .about img{
-    width:100%;
-    filter:grayscale(30%) sepia(8%);
-  }
-  .about h2{font-size:28px;}
-  .about p{font-size:16px; max-width:52ch; margin:16px 0 0;}
-  .about p + p{margin-top:14px;}
-
-  /* Contact band */
-  .contact{
-    background:var(--ink);
-    color:var(--paper);
-  }
-  .contact .wrap{
-    text-align:center;
-  }
-  .contact h2{
-    color:var(--paper);
-    font-size:32px;
-  }
-  .contact p{
-    color:rgba(247,243,232,0.8);
-    max-width:44ch;
-    margin:14px auto 0;
-    font-size:16px;
-  }
-  .contact-email{
-    display:inline-block;
-    margin-top:28px;
-    font-family:'Fraunces', serif;
-    font-size:26px;
-    color:var(--paper);
-    text-decoration:none;
-    border-bottom:1px solid var(--gold);
-    padding-bottom:4px;
-  }
-  .contact-links{
-    margin-top:22px;
-    font-size:15px;
-  }
-  .contact-links a{
-    color:var(--paper);
-    text-decoration:underline;
-    text-underline-offset:3px;
-  }
-
-  footer{
-    padding:28px 0;
-    text-align:center;
-    font-size:13px;
-    color:rgba(38,48,43,0.6);
-  }
-
-  /* Lightbox */
-  .lightbox{
-    position:fixed; inset:0;
-    background:rgba(20,15,25,0.92);
-    display:none;
-    align-items:center; justify-content:center;
-    z-index:100;
-    padding:40px;
-  }
-  .lightbox.open{display:flex;}
-  .lightbox img{
-    max-width:100%; max-height:82vh;
-    box-shadow:0 20px 60px rgba(0,0,0,0.5);
-  }
-  .lightbox-caption{
-    position:absolute;
-    bottom:36px; left:0; right:0;
-    text-align:center;
-    color:var(--paper);
-    font-size:14px;
-  }
-  .lightbox-close{
-    position:absolute; top:24px; right:32px;
-    background:none; border:none;
-    color:var(--paper);
-    font-size:32px;
-    line-height:1;
-    cursor:pointer;
-  }
-
-  /* Responsive */
-  @media (max-width:860px){
-    .hero{grid-template-columns:1fr; min-height:auto;}
-    .hero-photo{height:340px;}
-    .hero-text{padding:44px 28px;}
-    .about{grid-template-columns:1fr;}
-    .gallery{column-count:2;}
-    nav{padding:16px 20px;}
-    .nav-links{gap:16px; font-size:14px;}
-    .wrap{padding:0 20px;}
-  }
-  @media (max-width:520px){
-    .gallery{column-count:1;}
-    .nav-links{display:none;}
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{transition:none !important; scroll-behavior:auto !important;}
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -336,27 +37,47 @@
 <section id="work">
   <div class="wrap">
     <div class="section-head">
-      <h2>Recent work</h2>
-      <p>A mix of events, portraits, and program photography for nonprofits around Park City.</p>
+      <h2>Browse by event</h2>
+      <p>Photography from nonprofit and community events around Park City. Click an event to see the full gallery.</p>
     </div>
 
-    <div class="filters">
-      <button class="active" data-filter="all">All</button>
-      <button data-filter="events">Events</button>
-      <button data-filter="portraits">Portraits</button>
-      <button data-filter="campaigns">Campaigns &amp; programs</button>
-    </div>
+    <div class="event-grid">
 
-    <div class="gallery">
-      <figure data-category="events"><img src="https://picsum.photos/seed/pc-event1/800/1000" alt="Nonprofit fundraiser event"><figcaption>Community fundraiser, Main Street</figcaption></figure>
-      <figure data-category="portraits"><img src="https://picsum.photos/seed/pc-portrait1/800/600" alt="Volunteer portrait"><figcaption>Volunteer portrait series</figcaption></figure>
-      <figure data-category="campaigns"><img src="https://picsum.photos/seed/pc-campaign1/800/1100" alt="Campaign image for a local trail conservation nonprofit"><figcaption>Trail conservation campaign</figcaption></figure>
-      <figure data-category="events"><img src="https://picsum.photos/seed/pc-event2/800/900" alt="Community gathering"><figcaption>Winter benefit dinner</figcaption></figure>
-      <figure data-category="portraits"><img src="https://picsum.photos/seed/pc-portrait2/800/1000" alt="Staff portrait"><figcaption>Staff portraits, youth center</figcaption></figure>
-      <figure data-category="campaigns"><img src="https://picsum.photos/seed/pc-campaign2/800/650" alt="Program documentation photo"><figcaption>After-school program documentation</figcaption></figure>
-      <figure data-category="events"><img src="https://picsum.photos/seed/pc-event3/800/1050" alt="Outdoor charity event"><figcaption>Trailhead cleanup day</figcaption></figure>
-      <figure data-category="portraits"><img src="https://picsum.photos/seed/pc-portrait3/800/700" alt="Board member portrait"><figcaption>Board member portraits</figcaption></figure>
-      <figure data-category="campaigns"><img src="https://picsum.photos/seed/pc-campaign3/800/950" alt="Website campaign image"><figcaption>Website refresh imagery</figcaption></figure>
+      <a class="event-card" href="events/kpcw-back-alley-bash.html">
+        <div class="cover"><img src="https://picsum.photos/seed/back-alley-bash-cover/700/875" alt="2026 KPCW Back Alley Bash"></div>
+        <h3>2026 KPCW Back Alley Bash</h3>
+        <div class="meta">Old Town, Park City</div>
+        <p class="blurb">Live music and community celebration in Old Town.</p>
+      </a>
+
+      <a class="event-card" href="events/kimball-arts-festival.html">
+        <div class="cover"><img src="https://picsum.photos/seed/kimball-arts-cover/700/875" alt="2026 Kimball Arts Festival"></div>
+        <h3>2026 Kimball Arts Festival</h3>
+        <div class="meta">Main Street, Park City</div>
+        <p class="blurb">Park City's flagship summer arts festival.</p>
+      </a>
+
+      <a class="event-card" href="events/summit-county-fair-rodeo.html">
+        <div class="cover"><img src="https://picsum.photos/seed/fair-rodeo-cover/700/875" alt="2026 Summit County Fair — Rodeo"></div>
+        <h3>2026 Summit County Fair — Rodeo</h3>
+        <div class="meta">Summit County Fairgrounds</div>
+        <p class="blurb">Rodeo night at the Summit County Fair.</p>
+      </a>
+
+      <a class="event-card" href="events/summit-county-fair-demolition-derby.html">
+        <div class="cover"><img src="https://picsum.photos/seed/fair-derby-cover/700/875" alt="2026 Summit County Fair — Demolition Derby"></div>
+        <h3>2026 Summit County Fair — Demolition Derby</h3>
+        <div class="meta">Summit County Fairgrounds</div>
+        <p class="blurb">Demolition derby at the Summit County Fair.</p>
+      </a>
+
+      <a class="event-card" href="events/concerts.html">
+        <div class="cover"><img src="https://picsum.photos/seed/concerts-cover/700/875" alt="2026 Concerts"></div>
+        <h3>2026 Concerts</h3>
+        <div class="meta">Various venues, Park City</div>
+        <p class="blurb">Live concert coverage throughout the year.</p>
+      </a>
+
     </div>
   </div>
 </section>
@@ -366,9 +87,9 @@
     <img src="https://picsum.photos/seed/parkcity-portrait/700/840" alt="Portrait of the photographer">
     <div>
       <h2>About the project</h2>
-      <p>My name is Glen Kutler.  I'm a photography enthusiast based in Park City and want to use my passion for causes that matter.</p>
+      <p>I'm a photography enthusiast based in Park City — not a professional, but someone who takes the craft seriously and wanted to put it to use for causes that matter.</p>
       <p>This project offers free photography to local nonprofits: event coverage, staff and volunteer portraits, and images for websites, social media, and grant applications.</p>
-      <p>If your 501(c)(3) organization works in or around Park City, I'd love to help.</p>
+      <p>If your organization works in or around Park City, I'd love to help.</p>
     </div>
   </div>
 </section>
@@ -389,58 +110,6 @@
 <footer>
   GK Pro Bono Photography — Park City, Utah
 </footer>
-
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose" aria-label="Close image">&times;</button>
-  <img id="lightboxImg" src="" alt="">
-  <div class="lightbox-caption" id="lightboxCaption"></div>
-</div>
-
-<script>
-  // Filtering
-  const buttons = document.querySelectorAll('.filters button');
-  const figures = document.querySelectorAll('.gallery figure');
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      figures.forEach(fig => {
-        const show = filter === 'all' || fig.dataset.category === filter;
-        fig.classList.toggle('hidden', !show);
-      });
-    });
-  });
-
-  // Lightbox
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  const lightboxCaption = document.getElementById('lightboxCaption');
-  const lightboxClose = document.getElementById('lightboxClose');
-
-  figures.forEach(fig => {
-    fig.addEventListener('click', () => {
-      const img = fig.querySelector('img');
-      const caption = fig.querySelector('figcaption');
-      lightboxImg.src = img.src.replace(/\/\d+\/\d+$/, '/1600/1200');
-      lightboxImg.alt = img.alt;
-      lightboxCaption.textContent = caption ? caption.textContent : '';
-      lightbox.classList.add('open');
-    });
-  });
-
-  function closeLightbox(){
-    lightbox.classList.remove('open');
-    lightboxImg.src = '';
-  }
-  lightboxClose.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', (e) => {
-    if(e.target === lightbox) closeLightbox();
-  });
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') closeLightbox();
-  });
-</script>
 
 </body>
 </html>
