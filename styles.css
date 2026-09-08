@@ -95,7 +95,12 @@ nav{
   margin:22px 0 0;
   font-size:18px;
   color:var(--charcoal);
-  max-width:38ch;
+  max-width:42ch;
+}
+.hero-text p a{
+  text-decoration:underline;
+  text-underline-offset:2px;
+  color:var(--ink);
 }
 .cta{
   display:inline-block;
