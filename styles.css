@@ -275,6 +275,28 @@ footer{
   line-height:1;
   cursor:pointer;
 }
+.lightbox-arrow{
+  position:absolute; top:50%;
+  transform:translateY(-50%);
+  background:rgba(247,243,232,0.12);
+  border:none;
+  color:var(--paper);
+  font-size:28px;
+  line-height:1;
+  width:52px; height:52px;
+  border-radius:50%;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .2s ease;
+}
+.lightbox-arrow:hover{background:rgba(247,243,232,0.25);}
+.lightbox-prev{left:20px;}
+.lightbox-next{right:20px;}
+@media (max-width:600px){
+  .lightbox-arrow{width:42px; height:42px; font-size:22px;}
+  .lightbox-prev{left:8px;}
+  .lightbox-next{right:8px;}
+}
 
 /* Responsive */
 @media (max-width:860px){
